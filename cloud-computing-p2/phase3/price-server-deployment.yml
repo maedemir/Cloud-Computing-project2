@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: price-server
+  name: price-server
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: price-server
+  template:
+    metadata:
+      labels:
+        app: price-server
+    spec:
+      containers:
+      - image: maedemir/price-server
+        name: price-server
+        env:
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: price-server-config
+                key: PORT
+          - name: API_KEY
+            valueFrom:
+              configMapKeyRef:
+                name: price-server-config
+                key: API_KEY
+          - name: TIME_TO_EXPIRE
+            valueFrom:
+              configMapKeyRef:
+                name: price-server-config
+                key: TIME_TO_EXPIRE
+          - name: NAME
+            valueFrom:
+              configMapKeyRef:
+                name: price-server-config
+                key: NAME
+          - name: ADDRESS
+            valueFrom:
+              configMapKeyRef:
+                name: price-server-config
+                key: ADDRESS

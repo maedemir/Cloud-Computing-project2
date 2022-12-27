@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: my-curl
+  name: my-curl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-curl
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: my-curl
+    spec:
+      containers:
+      - image: maedemir/my-curl
+        name: my-curl
+        command: ["/bin/sleep"]
+        args: ["infinity"]
+        resources: {}
+status: {}
